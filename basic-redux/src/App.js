@@ -1,6 +1,8 @@
 import React from 'react';
 import logo from './logo.svg';
-import { Counter } from './components/counter/Counter';
+
+import { Calculator } from './components/Calculator'
+// import { Counter } from './components/counter/Counter';
 import './App.css';
 
 function App() {
@@ -8,7 +10,8 @@ function App() {
     <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
-        <Counter />
+        {/* <Counter /> */}
+        <Calculator />
         <p>
           Edit <code>src/App.js</code> and save to reload.
         </p>
