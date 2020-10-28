@@ -5,6 +5,7 @@ import {
     // Selectors
     selectIsStarted,
     selectNumbers,
+    selectStateCalculator,
     // Actions
     startAndStop,
     changeNumber
@@ -15,6 +16,7 @@ export function Calculator() {
 
     const isStarted = useSelector(selectIsStarted)
     const numbers = useSelector(selectNumbers)
+    const stateCalculator = useSelector(selectStateCalculator)
     
     return (  
         <nav className="Navbar">
@@ -29,6 +31,7 @@ export function Calculator() {
 
         {isStarted ? (
         <div className="Label">
+            <p >{stateCalculator}</p>
             {numbers.map((row, rowIndex) => (
             <div key={rowIndex} className="Label__buttons">
                 {row.map((cellValue, cellIndex) => (

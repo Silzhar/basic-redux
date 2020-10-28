@@ -40,4 +40,6 @@ export const selectNumbers = (state) => {
     return state.calculator.numbers
 }
 
+export const selectStateCalculator = (state) => state.calculator.stateCalculator
+
 export default calculatorSlice.reducer
