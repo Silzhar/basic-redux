@@ -22,7 +22,7 @@ export const calculatorSlice = createSlice({
 
         changeNumber: (state, action) => {
             const { row, cell } = action.payload
-            state.numbers[row][cell] = state.stateCalculator
+            state.stateCalculator = state.numbers[row][cell]  
         }
     }
 })
