@@ -4,47 +4,51 @@ import { useSelector, useDispatch } from 'react-redux'
 import { 
     // Selectors
     selectIsStarted,
-    selectNumbers,
+    selectLabel,
     selectStateCalculator,
     // Actions
     startAndStop,
-    changeNumber
+    changeNumber,
+    addProcess
  } from '../../features/calculatorSlice'
 
 export function Calculator() {
     const dispatch = useDispatch()
 
     const isStarted = useSelector(selectIsStarted)
-    const numbers = useSelector(selectNumbers)
+    const label = useSelector(selectLabel)
     const stateCalculator = useSelector(selectStateCalculator)
     
     return (  
         <nav className="Navbar">
         <div>
-        <h3>Calcularora</h3>
+        <h3>Calculadora</h3>
 
         <button onClick={() => dispatch(startAndStop())} className="Navbar__playStop">
-            {isStarted ?  'STOP'
-            :  'PLAY' }
+            {isStarted ?  'STOP' : 'PLAY' }
         </button>
         </div>
 
         {isStarted ? (
         <div className="Label">
             <p >{stateCalculator}</p>
-            {numbers.map((row, rowIndex) => (
+            {label.map((row, rowIndex) => (
             <div key={rowIndex} className="Label__buttons">
                 {row.map((cellValue, cellIndex) => (
                 <button
                     className="Label__radioButton"
                     key={rowIndex + cellIndex}
                     onClick={() => {
-                    dispatch(
-                        changeNumber({
-                        row: rowIndex,
-                        cell: cellIndex,
-                        })
-                    );
+                        if (stateCalculator !== '0'){
+                             dispatch(addProcess({
+                                row: rowIndex,
+                                cell: cellIndex,
+                             }))}
+                    //     dispatch(changeNumber({
+                    //         row: rowIndex,
+                    //         cell: cellIndex,
+                    //     })
+                    // );
                     }}
                 >
                     {cellValue}
