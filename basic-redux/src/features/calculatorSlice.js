@@ -6,11 +6,13 @@ export const calculatorSlice = createSlice({
 
     initialState: {
         isStarted: false,
-        stateCalculator: 0,
-        numbers: [
-            [1, 2, 3],
-            [4, 5, 6],
-            [7, 8, 9],
+        stateCalculator: ' ',
+        newValue: '',
+        label: [
+            ['1', '2', '3', '+'],
+            ['4', '5', '6', '-'],
+            ['7', '8', '9', 'x'],
+            ['0' , '/', '=']
           ],
       
     },
@@ -18,17 +20,25 @@ export const calculatorSlice = createSlice({
     reducers: {
         startAndStop: (state) => {
             state.isStarted = !state.isStarted
+            state.stateCalculator = ''
         },
 
         changeNumber: (state, action) => {
             const { row, cell } = action.payload
-            state.stateCalculator = state.numbers[row][cell]  
+            state.stateCalculator = state.label[row][cell]  
+        },
+
+        addProcess: (state, action) => {
+            const { row, cell } = action.payload
+            state.newValue = state.stateCalculator + state.label[row][cell]
+            state.stateCalculator = state.newValue
+            
         }
     }
 })
 
 // ACTIONS.
-export const { startAndStop, changeNumber } = calculatorSlice.actions
+export const { startAndStop, changeNumber, addProcess } = calculatorSlice.actions
 
 // Selectors. Trae un valor del estado en forma de variable.
 // state : estado de Redux.
@@ -36,8 +46,8 @@ export const selectIsStarted = (state) => {
     return state.calculator.isStarted
 }
 
-export const selectNumbers = (state) => {
-    return state.calculator.numbers
+export const selectLabel = (state) => {
+    return state.calculator.label
 }
 
 export const selectStateCalculator = (state) => state.calculator.stateCalculator
