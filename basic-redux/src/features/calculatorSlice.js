@@ -1,3 +1,4 @@
+/* eslint-disable no-lone-blocks */
 import { createSlice } from '@reduxjs/toolkit'
 
 
@@ -8,6 +9,7 @@ export const calculatorSlice = createSlice({
         isStarted: false,
         stateCalculator: ' ',
         newValue: '',
+        parseValue: 0,
         label: [
             ['1', '2', '3', '+'],
             ['4', '5', '6', '-'],
@@ -32,6 +34,18 @@ export const calculatorSlice = createSlice({
             const { row, cell } = action.payload
             state.newValue = state.stateCalculator + state.label[row][cell]
             state.stateCalculator = state.newValue
+
+            if (state.label[row][cell] === '+'){
+                const parseNewValue = parseInt(state.newValue)
+                const { row, cell } = action.payload
+                state.stateCalculator = state.label[row][cell] 
+                const parseStateCalculator = parseInt(state.stateCalculator)
+
+                const sumatory = parseNewValue + parseStateCalculator
+                state.parseValue = sumatory
+            }
+            // eslint-disable-next-line no-unused-expressions
+            // { state.label[row][cell] === '+' ? (state.parseValue = parseInt(state.newValue) + parseInt(state.label[row][cell])) : null}
             
         }
     }
