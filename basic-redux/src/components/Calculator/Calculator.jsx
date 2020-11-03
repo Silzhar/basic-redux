@@ -39,8 +39,8 @@ export function Calculator() {
                     className="Label__radioButton"
                     key={rowIndex + cellIndex}
                     onClick={() => {
-                        if (stateCalculator !== '0'){
-                             dispatch(addProcess({
+                        if (stateCalculator !== []){
+                             dispatch(changeNumber({
                                 row: rowIndex,
                                 cell: cellIndex,
                              }))}
