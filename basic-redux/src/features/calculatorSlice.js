@@ -7,14 +7,14 @@ export const calculatorSlice = createSlice({
 
     initialState: {
         isStarted: false,
-        stateCalculator: ' ',
-        newValue: '',
+        stateCalculator: [],
+        newValue: [],
         parseValue: 0,
         label: [
-            ['1', '2', '3', '+'],
-            ['4', '5', '6', '-'],
-            ['7', '8', '9', 'x'],
-            ['0' , '/', '=']
+            [1, 2, 3, '+'],
+            [4, 5, 6, '-'],
+            [7, 8, 9, 'x'],
+            [0 , '/', '=']
           ],
       
     },
@@ -22,24 +22,25 @@ export const calculatorSlice = createSlice({
     reducers: {
         startAndStop: (state) => {
             state.isStarted = !state.isStarted
-            state.stateCalculator = ''
+            state.stateCalculator = []
         },
 
         changeNumber: (state, action) => {
             const { row, cell } = action.payload
-            state.stateCalculator = state.label[row][cell]  
+            state.stateCalculator = state.label[row][cell]
+            
         },
 
         addProcess: (state, action) => {
             const { row, cell } = action.payload
-            state.newValue = state.stateCalculator + state.label[row][cell]
+            state.newValue = state.stateCalculator.push(state.label[row][cell])
             state.stateCalculator = state.newValue
 
             if (state.label[row][cell] === '+'){
-                const parseNewValue = parseInt(state.newValue)
+                const parseNewValue = parseInt(state.newValue, 10)
                 const { row, cell } = action.payload
                 state.stateCalculator = state.label[row][cell] 
-                const parseStateCalculator = parseInt(state.stateCalculator)
+                const parseStateCalculator = parseInt(state.stateCalculator, 10)
 
                 const sumatory = parseNewValue + parseStateCalculator
                 state.parseValue = sumatory
