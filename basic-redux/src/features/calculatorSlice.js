@@ -9,6 +9,7 @@ export const calculatorSlice = createSlice({
         isStarted: false,
         stateCalculator: [],
         newValue: [],
+        stringValue: 0,
         parseValue: 0,
         label: [
             [1, 2, 3, '+'],
@@ -27,7 +28,13 @@ export const calculatorSlice = createSlice({
 
         changeNumber: (state, action) => {
             const { row, cell } = action.payload
-            state.stateCalculator = state.label[row][cell]
+            state.stateCalculator.push(state.label[row][cell])
+            if (state.label[row][cell] === '+') {
+                state.stateCalculator.pop()
+                state.stringValue = state.stateCalculator.join('')
+                state.parseValue = parseInt(state.stringValue)
+            }
+            // state.stateCalculator = state.label[row][cell]
             
         },
 
