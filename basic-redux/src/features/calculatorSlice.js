@@ -41,6 +41,12 @@ export const calculatorSlice = createSlice({
                 state.total = state.parseValue + state.newValue
                 state.stateCalculator.length = 0
                 state.stateCalculator = state.total
+
+                // Reset states. 
+                state.stringValue = 0
+                state.parseValue = 0
+                state.newValue = 0
+                state.total = 0
             }
             
             
