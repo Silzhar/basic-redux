@@ -8,9 +8,12 @@ import {
     selectStateCalculator,
     // Actions
     startAndStop,
-    changeNumber,
-    addProcess
+    labelNumbers,
+    addProcess,
+    subtractProcess
  } from '../../features/calculatorSlice'
+
+ import './Calculator.scss'
 
 export function Calculator() {
     const dispatch = useDispatch()
@@ -38,26 +41,38 @@ export function Calculator() {
                 <button
                     className="Label__radioButton"
                     key={rowIndex + cellIndex}
-                    onClick={() => {
-                        if (stateCalculator !== []){
-                             dispatch(changeNumber({
-                                row: rowIndex,
-                                cell: cellIndex,
-                             }))}
-                    //     dispatch(changeNumber({
-                    //         row: rowIndex,
-                    //         cell: cellIndex,
-                    //     })
-                    // );
+                    onClick={() => {dispatch(labelNumbers({
+                        row: rowIndex,
+                        cell: cellIndex,
+                     }))
                     }}
                 >
                     {cellValue}
                 </button>
-                ))}
+                ))}   
             </div>
-            ))}
+            ))}   
         </div>
         ) : null}
+        
+        
+        <button className="Label__radioButton"
+            onClick={() => {dispatch(addProcess({}))}} >
+                    +
+        </button>
+            
+        {/* <button className="Label__add" onClick={() => dispatch(addProcess(stateCalculator))}>
+              +
+            </button> */}
+            <button className="Label__subtract" onClick={() => dispatch(subtractProcess(stateCalculator))}>
+              -
+            </button>
+            <button className="Label__multiply" onClick={() => dispatch()}>
+              x
+            </button>
+            <button className="Label__divide" onClick={() => dispatch()}>
+              /
+            </button>
         </nav>
 
     )
