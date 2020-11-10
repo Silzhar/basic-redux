@@ -57,7 +57,7 @@ export function Calculator() {
         
         
         <button className="Label__radioButton"
-            onClick={() => {dispatch(addProcess({}))}} >
+            onClick={() => {dispatch(addProcess(labelNumbers()))}} >
                     +
         </button>
             

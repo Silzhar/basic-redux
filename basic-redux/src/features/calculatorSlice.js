@@ -37,7 +37,7 @@ export const calculatorSlice = createSlice({
         labelNumbers: (state, action) => {
             const { row, cell } = action.payload
             state.stateCalculator.push(state.label[row][cell])
-            state.stringValue = state.stateCalculator.join('')
+            
 
             if (state.label[row][cell] === 'Reset') { 
                 state.reset = action.payload
@@ -48,17 +48,17 @@ export const calculatorSlice = createSlice({
         addProcess: (state, action) => {
             // const { row, cell } = action.payload
             // state.stateCalculator.push(state.label[row][cell])
-            state.stringValue = state.stateCalculator.join('')
+            state.stringValue.push(state.stateCalculator.join('')) 
 
-            if (state.stateCalculator !== []) {
-                state.parseValue.push(parseInt(state.stringValue))
-                state.total = state.parseValue + state.newValue
+            // if (state.stateCalculator !== []) {
+            state.parseValue.push(parseInt(state.stringValue))
+            state.total = state.parseValue + state.newValue
 
-                state.stateCalculator.length = 0
-                state.stateCalculator = state.total
-                
-            } 
-            // else if (state.label[row][cell] === '=') {
+            
+            state.stateCalculator.push(state.total)
+            state.stateCalculator.length = 0
+            // } 
+            // if (state.label[row][cell] === '=') {
             //     state.newValue = parseInt(state.stringValue)
             //     state.total = state.parseValue + state.newValue
             //     state.stateCalculator.length = 0
