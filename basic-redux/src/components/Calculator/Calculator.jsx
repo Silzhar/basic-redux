@@ -57,15 +57,11 @@ export function Calculator() {
         ) : null}
         
         
-        <button className="Label__radioButton"
-            onClick={() => {dispatch(addProcess(labelNumbers()))}} >
-                    +
-        </button>
+            <button className="Label__radioButton" onClick={() => {dispatch(addProcess(labelNumbers()))}} >
+                +
+            </button>
             
-        {/* <button className="Label__add" onClick={() => dispatch(addProcess(stateCalculator))}>
-              +
-            </button> */}
-            <button className="Label__subtract" onClick={() => dispatch(subtractProcess(stateCalculator))}>
+            <button className="Label__subtract" onClick={() => dispatch(subtractProcess(labelNumbers()))}>
               -
             </button>
             <button className="Label__multiply" onClick={() => dispatch()}>
