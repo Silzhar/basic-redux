@@ -20,14 +20,7 @@ export const calculatorSlice = createSlice({
             [7, 8, 9 ],
             [0 , 'Reset']
           ],
-
-        reset: {
-            stringValue: 0,
-            parseValue: 0,
-            newValue: 0,
-            total: 0,
-        }
-      
+     
     },
 
     reducers: {
@@ -40,10 +33,13 @@ export const calculatorSlice = createSlice({
             const { row, cell } = action.payload
             state.stateCalculator.push(state.label[row][cell])
             
-
+            // ? ¿Mejor con payload? 
             if (state.label[row][cell] === 'Reset') { 
-                state.reset = action.payload
                 state.stateCalculator.length = 0
+                state.stringValue.length = 0
+                state.parseValue = 0
+                state.newValue = 0
+                state.total.length = 0
             }     
         },
 
@@ -64,24 +60,23 @@ export const calculatorSlice = createSlice({
         },
 
         solveProcess: (state, action) => {
+            state.newValue = parseInt(state.stateCalculator.join(''))
+            // limpiamos total:[] para no tener elementos en caso de un segundo proceso.
+            state.total.length = 0 
+
             switch (state.isStarted === true) {
                 case( state.processToResolve === '+'):
-                    state.newValue = parseInt(state.stateCalculator.join(''))
-                    state.total = state.parseValue + state.newValue
-                    state.stateCalculator.length = 0
-                    state.processToResolve = ''
-                    state.stateCalculator.push(state.total)
+                    state.total.push(state.parseValue + state.newValue)
                     break
 
                 case( state.processToResolve === '-'):
-                    state.newValue = parseInt(state.stateCalculator.join(''))
-                    state.total = state.parseValue - state.newValue
-                    state.stateCalculator.length = 0
-                    state.processToResolve = ''
-                    state.stateCalculator.push(state.total)
+                    state.total.push(state.parseValue - state.newValue)
                     break
             }
-
+            state.stateCalculator.length = 0
+            state.stringValue.length = 0
+            state.processToResolve = ''
+            state.stateCalculator.push(state.total)
         },
 
     }
