@@ -1,3 +1,4 @@
+/* eslint-disable default-case */
 /* eslint-disable no-lone-blocks */
 import { createSlice } from '@reduxjs/toolkit'
 
@@ -55,33 +56,32 @@ export const calculatorSlice = createSlice({
         },
 
         subtractProcess: (state, action) => {
-            const { row, cell } = action.payload
-            state.stateCalculator.push(state.label[row][cell])
-            state.stringValue = state.stateCalculator.join('')
-
-            if (state.label[row][cell] === '-') {
-                state.parseValue = parseInt(state.stringValue)
-                state.stateCalculator.length = 0
-                
-            } else if (state.label[row][cell] === '=') {
-                state.newValue = parseInt(state.stringValue)
-                state.total = state.parseValue - state.newValue
-                state.stateCalculator = state.total
-                state.stateCalculator.length = 0
-
-                // Reset states. 
-                state.reset = action.payload
-            }
+            state.processToResolve = '-'
+            state.stringValue.push(state.stateCalculator.join('')) 
+            state.parseValue = parseInt(state.stringValue)
+            state.stateCalculator.push(state.total)
+            state.stateCalculator.length = 0  
         },
 
         solveProcess: (state, action) => {
-            if (state.processToResolve === '+') {
-                state.newValue = parseInt(state.stateCalculator.join(''))
-                state.total = state.parseValue + state.newValue
-                state.stateCalculator.length = 0
-                state.processToResolve = ''
-                state.stateCalculator = state.total
+            switch (state.isStarted === true) {
+                case( state.processToResolve === '+'):
+                    state.newValue = parseInt(state.stateCalculator.join(''))
+                    state.total = state.parseValue + state.newValue
+                    state.stateCalculator.length = 0
+                    state.processToResolve = ''
+                    state.stateCalculator.push(state.total)
+                    break
+
+                case( state.processToResolve === '-'):
+                    state.newValue = parseInt(state.stateCalculator.join(''))
+                    state.total = state.parseValue - state.newValue
+                    state.stateCalculator.length = 0
+                    state.processToResolve = ''
+                    state.stateCalculator.push(state.total)
+                    break
             }
+
         },
 
     }
