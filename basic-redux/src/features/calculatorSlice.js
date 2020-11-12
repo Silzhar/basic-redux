@@ -49,7 +49,6 @@ export const calculatorSlice = createSlice({
         addProcess: (state, action) => {
             state.processToResolve = '+'
             state.stringValue.push(state.stateCalculator.join('')) 
-
             state.parseValue = parseInt(state.stringValue)
             state.stateCalculator.push(state.total)
             state.stateCalculator.length = 0           
@@ -78,9 +77,9 @@ export const calculatorSlice = createSlice({
         solveProcess: (state, action) => {
             if (state.processToResolve === '+') {
                 state.newValue = parseInt(state.stateCalculator.join(''))
-
                 state.total = state.parseValue + state.newValue
                 state.stateCalculator.length = 0
+                state.processToResolve = ''
                 state.stateCalculator = state.total
             }
         },
