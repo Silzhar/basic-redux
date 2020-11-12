@@ -9,14 +9,15 @@ export const calculatorSlice = createSlice({
         isStarted: false,
         stateCalculator: [],
         stringValue: [],
-        parseValue: [],
-        newValue: [],
+        parseValue: 0,
+        newValue: 0,
         total: [],
+        processToResolve: '',
         label: [
             [1, 2, 3 ],
             [4, 5, 6 ],
             [7, 8, 9 ],
-            [0 , '=', 'Reset']
+            [0 , 'Reset']
           ],
 
         reset: {
@@ -46,31 +47,12 @@ export const calculatorSlice = createSlice({
         },
 
         addProcess: (state, action) => {
-            // const { row, cell } = action.payload
-            // state.stateCalculator.push(state.label[row][cell])
+            state.processToResolve = '+'
             state.stringValue.push(state.stateCalculator.join('')) 
 
-            // if (state.stateCalculator !== []) {
-            state.parseValue.push(parseInt(state.stringValue))
-            state.total = state.parseValue + state.newValue
-
-            
+            state.parseValue = parseInt(state.stringValue)
             state.stateCalculator.push(state.total)
-            state.stateCalculator.length = 0
-            // } 
-            // if (state.label[row][cell] === '=') {
-            //     state.newValue = parseInt(state.stringValue)
-            //     state.total = state.parseValue + state.newValue
-            //     state.stateCalculator.length = 0
-            //     state.stateCalculator = state.total
-
-            //     // Reset states. 
-            //     state.reset = action.payload
-            // }
-            // if (state.label[row][cell] === 'Reset') { 
-            //     state.reset = action.payload
-            //     state.stateCalculator.length = 0
-            // }
+            state.stateCalculator.length = 0           
         },
 
         subtractProcess: (state, action) => {
@@ -91,13 +73,23 @@ export const calculatorSlice = createSlice({
                 // Reset states. 
                 state.reset = action.payload
             }
-        }
+        },
+
+        solveProcess: (state, action) => {
+            if (state.processToResolve === '+') {
+                state.newValue = parseInt(state.stateCalculator.join(''))
+
+                state.total = state.parseValue + state.newValue
+                state.stateCalculator.length = 0
+                state.stateCalculator = state.total
+            }
+        },
 
     }
 })
 
 // ACTIONS.
-export const { startAndStop, labelNumbers, addProcess, subtractProcess } = calculatorSlice.actions
+export const { startAndStop, labelNumbers, addProcess, subtractProcess, solveProcess } = calculatorSlice.actions
 
 // Selectors. Trae un valor del estado en forma de variable.
 // state : estado de Redux.

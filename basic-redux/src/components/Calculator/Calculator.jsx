@@ -10,7 +10,8 @@ import {
     startAndStop,
     labelNumbers,
     addProcess,
-    subtractProcess
+    subtractProcess,
+    solveProcess
  } from '../../features/calculatorSlice'
 
  import './Calculator.scss'
@@ -72,6 +73,9 @@ export function Calculator() {
             </button>
             <button className="Label__divide" onClick={() => dispatch()}>
               /
+            </button>
+            <button className="Label__divide" onClick={() => dispatch(solveProcess())}>
+              =
             </button>
         </nav>
 
