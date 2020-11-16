@@ -1,6 +1,6 @@
 # basic-redux
 
-## Repositorio básico de redux con calculadora
-## para charla explicativa sobre cçomo compartir estados a través de Redux.
+## Repositorio básico de redux con calculadora para charla explicativa sobre cómo compartir estados a través de Redux.
 
-# Notion :  https://www.notion.so/Introducci-n-a-Redux-d66c6691fa1d46f8b3bd0142ef8acbe6
+# Notion : 
+- [Notion](https://www.notion.so/Introducci-n-a-Redux-d66c6691fa1d46f8b3bd0142ef8acbe6)
